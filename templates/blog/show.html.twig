@@ -3,14 +3,30 @@
 {% block body %}
 
     <article>
-        <h2>{{article.title}}</h2>
-        <div class="metada">Ecrit le {{article.createdAt | date("d/m/y")}} à {{article.createdAt | date("H:i")}} dans la catégorie Politique</div>
+        <h2>{{ article.title }}</h2>
+        <div class="metada">Ecrit le {{ article.createdAt | date("d/m/y") }} à {{ article.createdAt | date("H:i") }}
+            dans la catégorie {{ article.category.title }}</div>
         <div class="content">
-            <img src="{{article.image}}" alt="">
-            {{article.content | raw }}
+            <img src="{{ article.image }}" alt="">
+            {{ article.content | raw }}
             <hr>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nesciunt repudiandae quam ad, nobis sapiente optio numquam placeat. Ducimus, enim sit delectus sed neque earum nihil quaerat non, ad in architecto rem doloremque reiciendis eaque hic perspiciatis facilis debitis? Corrupti atque impedit blanditiis ut eaque molestias esse sequi at quaerat numquam?
         </div>
     </article>
+
+    <section id="commentaires">
+        {% for comment in article.comments %}
+        <div class="comment">
+            <div class="row">
+                <div class="col-3">
+                    {{ comment.author }}(
+                    <small>{{ comment.createdAt |date("/m/Y à H:i") }}</small>)
+                </div>
+                <div class="col-9">
+                    {{ comment.content |raw }}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </section>
 
 {% endblock %}

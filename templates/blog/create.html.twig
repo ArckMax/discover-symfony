@@ -4,15 +4,26 @@
 
 {% block body %}
 
-    <h2>Création d'un nouvel article</h2>
+    <h2>
+
+        {% if editMode %} Mettre à jour l'article
+        {% else %}Création d'un nouvel article
+        {% endif %}
+
+    </h2>
 
     {{ form_start(formArticle) }}
 
     {{ form_row(formArticle.title, {"attr" : {"placeholder":"Titre de l'article"}}) }}
+    {{ form_row(formArticle.category) }}
     {{ form_row(formArticle.content, {"attr":{"placeholder":"Contenu de l'article"}}) }}
     {{ form_row(formArticle.image, {"attr":{"placeholder":"URL de l'image"}}) }}
 
-    <button type="submit" class="btn btn-success">Ajouter l'article</button>
+    <button type="submit" class="btn btn-success">
+        {% if editMode %} Enregistrer
+        {% else %} Ajouter l'article
+        {% endif %}
+    </button>
 
     {{ form_end(formArticle) }}
 
